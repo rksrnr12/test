@@ -139,7 +139,7 @@ print(countString.count) //위 문자열의 수를 알려준다
 //다른 문자들은 각각 저장될 때 다른 양의 메모리를 요구할 수 있으므로 특정 위치에 있는 문자를 결정하려면 문자열의 시작이나 끝에서 각 유니코드 스칼라를 반복해야 해서
 //스위프트는 문자열을 정수값으로 인덱싱할 수 없다
 
-let hello = "안녕하세요!"
+var hello = "안녕하세요!"
 //startIndex프로퍼티는 문자열의 첫번째 인덱스를 리턴해준다
 print(hello[hello.startIndex]) //안 출력
 //endIndex프로퍼티는 문자열의 마지막 문자 뒤의 인덱스를 리턴해준다
@@ -157,3 +157,15 @@ print(hello[hello.index(hello.startIndex, offsetBy: 3)]) //세 출력
 for index in hello.indices {
     print(hello[index])    // 각각의 문자열을 하나씩 출력한다
 }
+
+
+//Inserting and Removing(삽입 및 제거)
+//insert(_:at:)메서드는 단일 문자를 추가할 때 사용한다 at:입력된 위치에 문자가 추가된다
+hello.insert("!", at: hello.endIndex)
+//insert(contentOf:at:)메서드는 다른 문자열을 입력한 위치에 추가한다
+hello.insert(contentsOf: "반갑습니다", at: hello.index(before: hello.endIndex))
+//remove(at:)메서드는 입력한 인덱스에 위치한 문자를 제거한다
+hello.remove(at: hello.index(before: hello.endIndex))
+//removeSubrange(_:)메서드는 입력한 범위안에 문자들을 지워준다
+let range = hello.index(hello.endIndex, offsetBy: -5)..<hello.endIndex
+hello.removeSubrange(range)
