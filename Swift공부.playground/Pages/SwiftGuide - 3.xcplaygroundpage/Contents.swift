@@ -169,3 +169,5 @@ hello.remove(at: hello.index(before: hello.endIndex))
 //removeSubrange(_:)메서드는 입력한 범위안에 문자들을 지워준다
 let range = hello.index(hello.endIndex, offsetBy: -5)..<hello.endIndex
 hello.removeSubrange(range)
+
+//test
