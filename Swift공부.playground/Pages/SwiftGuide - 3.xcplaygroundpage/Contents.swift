@@ -211,4 +211,16 @@ if name.hasSuffix("주니어") {
 }
 
 //Unicode Representations of Strings(문자열의 유니코드 표현)
+//문자열을 3가지 유니코드 값으로 나타낼 수 있다
 
+for unicode in name.utf8 {
+    print(unicode) // name의 utf8형식 값이 출력됨
+}
+
+for unicode in name.utf16 {
+    print(unicode) // name의 utf16형식 값이 출력됨
+}
+
+for scalar in name.unicodeScalars {
+    print(scalar.value) //name의 스칼라 값이 출력됨,scalar.value = 스칼라 값 scalar = 문자출력
+}
