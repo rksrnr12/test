@@ -161,13 +161,54 @@ for index in hello.indices {
 
 //Inserting and Removing(삽입 및 제거)
 //insert(_:at:)메서드는 단일 문자를 추가할 때 사용한다 at:입력된 위치에 문자가 추가된다
-hello.insert("!", at: hello.endIndex)
+hello.insert("!", at: hello.endIndex) //마지막에 !추가됨
 //insert(contentOf:at:)메서드는 다른 문자열을 입력한 위치에 추가한다
-hello.insert(contentsOf: "반갑습니다", at: hello.index(before: hello.endIndex))
+hello.insert(contentsOf: "반갑습니다", at: hello.index(before: hello.endIndex)) //마지막에 반갑습니다 추가됨
 //remove(at:)메서드는 입력한 인덱스에 위치한 문자를 제거한다
-hello.remove(at: hello.index(before: hello.endIndex))
+hello.remove(at: hello.index(before: hello.endIndex)) //마지막 글자 지워짐
 //removeSubrange(_:)메서드는 입력한 범위안에 문자들을 지워준다
 let range = hello.index(hello.endIndex, offsetBy: -5)..<hello.endIndex
-hello.removeSubrange(range)
+hello.removeSubrange(range) // 끝에서 -5까지 지워짐
 
-//test
+//RangeReplaceableCollection 프로토콜을 준수하는 모든 유형은 위에 메서드를 사용할 수 있다
+
+//Substrings
+//위에 니온 방식들을 사용하여 얻은 문자열들은 string이 아니 substring의 인스턴스이다 이 substring은 string과 거의 동일한 형태이지만
+//substring은 string이 사용하는 storage의 일부를 재사용 한다 이는 substring을 사용하는 동안에는 원래 string이 메모리에 보관되기 때문에
+//substring을 오래 사용하기에는 적합하지 않기 때문에 장기 사용에는 sunstring을 string으로 바꿔주는 것이 좋다
+
+let mainString = "해리포터와 불의 잔"
+let index = mainString.firstIndex(of: "와") ?? mainString.endIndex
+let subString = mainString[..<index]  //mainString과 storage를 공유중
+
+let newString = String(subString) //장기 사용에는 String으로 변경
+
+//Comparing Strings(문자열 비교)
+//swift는 문자열 비교를 위한 3가지 방법을 제공한다
+//1 - string and character equality(문자열과 문자 같음) 2 - perfix equality(접두사 같음) 3 - suffix equality(접미사 같음)
+
+//String and Character Equality(문자열과 문자 같음)
+//문자열과 문자 비교에는 ==,!= 이 사용된다
+//유니코드 비교도 가능하다
+
+let compareString1 = "아이언맨"
+let compareString2 = "아이언맨"
+if compareString1 == compareString2 {
+    print("같음") //문자열이 같으면 출력
+}else{
+    print("다름") //다르면 출력 != 연산자와 같음
+}
+
+//Prefix and Suffix Equality (접두사 접미사 비교)
+//문자열에 특정 접두사 접미사를 확인하려면 hasPrefix(_:),hasSuffix(_:)메서드를 사용하고 bool값을 반환한다
+
+let name = "로버트 다우니 주니어"
+if name.hasPrefix("로버트") {
+    print("있음")            //name문자열이 로버트로 시작하면 출력
+}
+if name.hasSuffix("주니어") {
+    print("있음")           //name문자열이 주니어로 끝나면 출력
+}
+
+//Unicode Representations of Strings(문자열의 유니코드 표현)
+
