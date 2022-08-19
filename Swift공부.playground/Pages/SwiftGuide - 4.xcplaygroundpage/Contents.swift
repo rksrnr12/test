@@ -60,3 +60,65 @@ for (index,value) in stringArray.enumerated() {
 }
 
 //Sets(set 배열)
+//array와 똑같은 배열이지만 순서가 랜덤하고 중복된 값을 저장할 수 없다
+
+//Hash Values for Set Types
+//set 배열은 hashable한 값들만 저장이 가능하다 swift의 기본 타입들인 String,Int,Double,Bool 타입은 모두 hashable을 준수한다
+//hashable을 준수하는 커스텀 타입을 만들어서 사용할 수 있다
+
+//Set Type syntax
+//Set<Element>로 선언하며 Element는 값의 타입이다
+
+//Creating and initializing an Empty Set(빈 set배열 만들기)
+var emptySetArray = Set<Character>() //이렇게 만들 수 있다
+emptySetArray.insert("a") //insert()메서드로 값을 추가할 수 있다
+emptySetArray = [] // []로 빈배열로 만들 수 있다
+
+//Creating a Set with an Array Literal(배열 리터럴로 set 배열 만들기)
+var setArray: Set<String> = ["케인","손","클루셉"] //다음처럼 만들 수 있다
+var setArray2 : Set = ["벤탕쿠르","호이비에르"] //다음처럼 값의 타입을 생략할 수 있다
+
+//Accessing and Modifying a Set(set배열 수정하기)
+setArray.count //count프로퍼티로 개수를 알 수 있다
+setArray.isEmpty //isEmpty프로퍼티로 값이 0개이면 true 그 외는 false를 출력한다
+
+if setArray.remove("클루셉") != nil{
+    print("있음")              //remove(_:)메서드로 입력받은 값이 존재하면 지우고 없으면 nil을 반환해준다
+}else{
+    print("없음")
+}
+setArray2.removeAll() //removeAll()메서드로 모든 값을 지울 수 있다
+setArray.contains("케인") //contains()메서드로 입력된 값이 배열에 존재하는지 확인 가능
+
+//Iterating Over a Set
+for item in setArray {
+    print(item)       //for in 반북문을 사용하여 값들을 알 수 있다
+}
+
+for item in setArray.sorted() {
+    print(item)       //set배열은 순서가 없기때문에 sorted()메서드를 사용하여 정렬할 수 있다 sorted(by:)메서드에 < 연산자를 넣어 원하는 정렬도 가능하다
+}
+
+//Performing Set Operations
+//두 set를 결합하거나, 공통 값을 결정하거나, 동일한 값을 모두 포합하는지,일부 또는 전혀 포함하지 않는지를 확인하는 것이 가능하다
+
+//Fundamental Set Operations(기본적인 배열 작업)
+
+let setA:Set = [1,3,5,7,9]
+let setB:Set = [2,4,6,8,10]
+let setC:Set = [2,3,5,7]
+
+setA.union(setB).sorted() //union(_:)메서드는 두 set배열을 합친 배열을 출력한다
+setA.intersection(setB).sorted() //intersection(_:)메서드는 두 set배열의 교집합을 출력한다
+setA.subtracting(setC).sorted() //subtracting(_:)매서드는 입력받은 배열의 값을 뺀 나머지 값만 출력한다
+setA.symmetricDifference(setC).sorted()//symmetricDifferenc(_:)매서드는 중복되는 값을 뺀 나머지 값을 출력한다
+
+//Set Membership and Equality
+
+setA == setB // == 연산자를 사용해 두 배열이 같은지 비교할 수 있다
+setA.isSubset(of: setB) // isSubset(of:)메서드는 입력받은 배열에 setA가 포함된 상태인지 확인해준다
+setA.isSuperset(of: setB) //isSuperset(of:)메서드는 입력받은 배열이 setA에 포함된 상태인지 알려준다
+setA.isStrictSubset(of: setB) // isStrictSubset(of:)메서드는 입력받은 배열에 setA가 포함된 상태이고 setA 값이 아닌 다른 값이 하나이상 존재할때 true를 반환한다
+setA.isStrictSuperset(of: setB) //isStrictSuperset(of:)메서드는 입력받은 배열이 setA에 포함된 상태이고 setA에 입력받은 배열의 값이 아닌 다른 값이 하나이상 존재할때 true를 반환한다
+
+
