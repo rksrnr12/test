@@ -120,5 +120,65 @@ setA.isSubset(of: setB) // isSubset(of:)메서드는 입력받은 배열에 setA
 setA.isSuperset(of: setB) //isSuperset(of:)메서드는 입력받은 배열이 setA에 포함된 상태인지 알려준다
 setA.isStrictSubset(of: setB) // isStrictSubset(of:)메서드는 입력받은 배열에 setA가 포함된 상태이고 setA 값이 아닌 다른 값이 하나이상 존재할때 true를 반환한다
 setA.isStrictSuperset(of: setB) //isStrictSuperset(of:)메서드는 입력받은 배열이 setA에 포함된 상태이고 setA에 입력받은 배열의 값이 아닌 다른 값이 하나이상 존재할때 true를 반환한다
+setA.isDisjoint(with: setB) //공통된 값이 없으면 true 반대면 false
 
+//Dictionary
+
+//Dictionary Type Shorthand Syntax
+//Dictionary<Key, Value>,[Key: Value]와 같은 방법으로 사용가능
+
+//Creating an Empty Dictionary(빈 딕셔너리 배열 만들기)
+var dictionaryArray:[Int: String] = [:] //다음처럼 빈 배열 생성가능
+dictionaryArray[16] = "sixteen" // KEY값이 16이고 value가 "sixteen"
+dictionaryArray = [:] // 빈 배열
+
+//Creating a Dictionary with a Dictionary Litera
+//배열 리터럴을 사용하여 배열을 만들 수 있고 타입이 일정해야 한다
+var airports: [String:String] = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
+//위처럼 값을 넣을수 있다
+var airports2 = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
+//위처럼 타입이 일정한 값들을 넣어주면 알아서 타입추론을 한다
+
+//Accessing and Modifying a Dictionary(배열에 접근하고 수정하기)
+airports.count // .count프로퍼티로 개수 확인가능
+airports.isEmpty // .isEmpty프로퍼티로 빈 배열인지 확인가능
+airports["LHR"] = "London Heathrow" //새로운 key와 value값 추가가능
+
+//.updateValue(_:forKey:)메서드는 입력한 Key값이 존재하면 입력한 Value값을 넣어주고 이전 Value값을 반환해준다
+//입력한 Key값이 새로운 Key값 이면 배열에 추가하고 nil을 반환
+if let oldValue = airports.updateValue("Dublin Airport", forKey: "DUB") {
+    print("이전 값 =\(oldValue),배열 = \(airports)")
+    //기존에 있던 값, 배열을 업데이트하고 이전 값을 반환
+}else {
+    print(airports)
+    //기존에 없던 값, 배열에 새로 추가해 줌
+}
+
+//다음처럼 특정 KEY값을 검색할 수 있다
+if let airportName = airports["DUB"] {
+    print(airportName) //존재하는 KEY값이면 Value값을 반환해준다
+}else{
+    //존재하지 않으면 nil을 반환해준다
+}
+
+airports["APL"] = "Apple International" //새로운 값을 추가해준다
+airports["APL"] = nil //nil값을 넣어주면 배열에서 지워진다
+
+//.removeValue(forKey:)메서드는 입력받은 KEY값을 확인하고 존재하면 지우고 아니면 nil을 반환한다
+if let removedValue = airports.removeValue(forKey: "DUB") {
+    print(removedValue) //KEY값이 존재하면 배열에서 지워주고 지워진 Value를 반환한다
+}else{
+    //KEY값이 없으면 nil 반환
+}
+
+//Iterating Over a Dictionary(배열 반복하기)
+
+//다음처럼 배열을 반복할 수 있다
+for airport in airports {
+    print(airport.key) //배열의 KEY값 반복출력
+    print(airport.value) //배열의 Value값 반복출력
+}
+
+let airportCode = [String](airports.keys) //배열의 KEY값을 따로 배열로 생성
+let airportName = [String](airports.values) //배열의 Value값을 따로 배열로 생성
 
